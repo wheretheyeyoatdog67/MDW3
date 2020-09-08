@@ -9,16 +9,18 @@ class map{
   drawMap(){
     for (var i = 0; i < 900/50; i++) {
       for (var j = 0; j < 700/50; j++) {
-        strokeWeight(1)
-        rect(50*i,50*j,50,50)
-        imageMode(CORNER)
-        image(this.mapTiles[i][j],i*50,j*50);
 
+        imageMode(CORNER)
+
+        //if(!player.isInCabin){
+          strokeWeight(1)
+          rect(50*i,50*j,50,50)
+        image(this.mapTiles[i][j],i*50,j*50);
         if(this.midGround[i][j][0]!=undefined) image(this.midGround[i][j][0],i*50,j*50)
         if(this.groundItem[i][j][0]!=undefined) image(this.groundItem[i][j][0],i*50+10,j*50+10)
         if(this.foreGround[i][j][0]!=undefined)
         {
-          if(this.foreGround[i][j][0]==cabin ||this.foreGround[i][j][0]==tree5|| this.foreGround[i][j][0]==furnaceOff||this.foreGround[i][j][0]==furnace){
+          if(this.foreGround[i][j][0]==cabin ||this.foreGround[i][j][0]==tree6 ||this.foreGround[i][j][0]==tree5|| this.foreGround[i][j][0]==furnaceOff||this.foreGround[i][j][0]==furnace){
             this.twobytwoArr.push([i,j,this.foreGround[i][j][0]])
           }else image(this.foreGround[i][j][0],i*50,j*50)
         }

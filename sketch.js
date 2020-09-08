@@ -23,10 +23,17 @@ function setup() {
 function draw(){
   background(255)
   gameClock +=1;
-  map.drawMap();
-  player.update();
   pMap.drawPMap();
+  map.drawMap();
+
+  if(player.isInCabin == true){
+
+  image(cabinInside,width/2,height/2)
+}
+  player.update();
+
   inv.update();
+
 
   if(dragingItem == true){
     dragItem(indexDrag);
@@ -105,8 +112,12 @@ function preload() {
     furnaceOffInv =  loadImage('Tiles/2by2/furnaceOffInv.png');
     campfire = loadImage('Tiles/foreGround/campfire.png');
     tree5 = loadImage('Tiles/foreGround/tree5.png');
+    tree6 = loadImage('Tiles/foreGround/tree6.png');
+    cabinInside = loadImage('Cabin/insideCrop.png');
 }
 function resize(){
+  cabinInside.resize(600,450);
+  tree6.resize(50,100);
   campfire.resize(50,50);
   furnace.resize(100,100);
   furnaceOff.resize(100,100);

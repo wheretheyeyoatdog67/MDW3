@@ -5,6 +5,8 @@ class player {
     this.curAnimation = pf1;
     this.lastDir = 3;
     this.teleArr = [];
+    this.isInCabin = false;
+    this.houseLoc = [];
   }
   animate(){
     if(gameClock%20 == 0){
@@ -58,8 +60,12 @@ class player {
     this.draw();
     this.fireProjectilesNrender();
     this.drawTele();
+    if(this.isInCabin == true){
+      this.playerLeaveHouse()
+    }
   }
   collision(xCoord,yCoord){
+    if(this.isInCabin==false){
     if(xCoord==-1 && this.x == 0) return true
     else if(xCoord==1 && this.x == 17) return true
     else if(yCoord==-1 && this.y == 0) return true
@@ -73,7 +79,8 @@ class player {
     else return false;
     else if(yCoord==-1) if(map.foreGround[this.x][this.y-1][0] == undefined) return true
     else return false;
-
+  }
+  return true;
   }
 
   teleport(x,y,time){
@@ -109,7 +116,16 @@ drawTele(){
 
   }
 }
+  playerLeaveHouse(){
+    if(this.x == 10 || 11){
+      if(this.y == 12){
+        this.isInCabin = false;
+        this.x = this.houseLoc[0]
+        this.y = this.houseLoc[1]
+      }
 
+    }
+  }
 
   pickUpGroundItems(quantity){
     if(inv.backPackArr.length!=0){

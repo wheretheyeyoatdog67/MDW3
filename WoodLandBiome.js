@@ -17,18 +17,24 @@ function createWoodlandsBiome(){
         else if (rand < 40&& map.mapTiles[i][j]!=sand1) map.foreGround[i][j][0] = rock2;
         else if (rand < 45&& map.mapTiles[i][j]!=sand1) map.foreGround[i][j][0] = berrybush;
         else if (rand < 60 && map.mapTiles[i][j]!=sand1) map.midGround[i][j][0] = grassMid;
-        if (rand > 60 && map.mapTiles[i][j]==sand1) map.midGround[i][j][0] =reeds;
+        if (rand < 40 && map.mapTiles[i][j]==sand1) map.midGround[i][j][0] =reeds;
         if (rand > 99 && map.mapTiles[i][j]!=sand1) map.midGround[i][j][0] =mush;
+        if(rand > 70) {
           if( i<17 && j < 13&&map.foreGround[i+1][j][0] == undefined && map.foreGround[i+1][j+1][0] == undefined &&map.foreGround[i][j+1][0] == undefined){
-            if(rand > 95) {
+              if(map.mapTiles[i][j] == sand1){
+                map.foreGround[i][j][0] = tree6
 
-              map.foreGround[i][j][0] = tree5
-              map.foreGround[i+1][j][0] = transparent
-              map.midGround[i][j+1][0] = transparent
-              map.midGround[i+1][j+1][0] = transparent
+                map.midGround[i][j+1][0] = transparent
 
+              }
+              else if (rand > 96){ map.foreGround[i][j][0] = tree5
+                map.foreGround[i+1][j][0] = transparent
+                map.midGround[i][j+1][0] = transparent
+                map.midGround[i+1][j+1][0] = transparent
+              }
 
             }
+
           }
 
       }

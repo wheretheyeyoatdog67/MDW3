@@ -9,6 +9,7 @@ function keyPressed() {
 switch(keyCode){
   case 65:
   if(player.collision(-1,0)){
+    console.log("col")
     player.x -=1
     player.lastDir = 2;
     player.curAnimation = pl1;
@@ -155,6 +156,15 @@ switch(inv.invArr[inv.curItem]){
 
 
     }
+    if(dist(x,y,player.x,player.y)==1){
+      if(map.foreGround[x][y][0]==cabin||map.foreGround[x-1][y][0]==cabin||map.foreGround[x-1][y-1][0]==cabin||map.foreGround[x][y-1][0]==cabin){
+        player.isInCabin = true;
+        player.houseLoc[0]=player.x
+        player.houseLoc[1]=player.y
+        player.x = 11;
+        player.y = 11;
+      }
+      }
     if(inv.backPack == true ){
       if(dragingItem!=true){
       if(x>=3){let l = x-3;
