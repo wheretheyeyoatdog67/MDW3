@@ -5,13 +5,18 @@ class map{
     this.foreGround;
     this.groundItem;
     this.twobytwoArr=[];
+    this.time=50;
+    this.timeDir = 1;
+    this.lightArr = [];
+    this.campfireArr = [];
 }
   drawMap(){
+    this.mapDayNight()
     for (var i = 0; i < 900/50; i++) {
       for (var j = 0; j < 700/50; j++) {
-
+        player.torchLight(i,j);
+        this.campfireTorchLight(i,j);
         imageMode(CORNER)
-
         //if(!player.isInCabin){
           strokeWeight(1)
           rect(50*i,50*j,50,50)
@@ -37,6 +42,7 @@ class map{
       imageMode(CORNER)
       image(this.twobytwoArr[i][2],this.twobytwoArr[i][0]*50,this.twobytwoArr[i][1]*50)
     }
+
     imageMode(CENTER)
     this.twobytwoArr=[];
     //DRAW INVENTORY
@@ -47,16 +53,32 @@ class map{
     }
   }
 
+  darken(){
+    if(this.time < 40){
+    for (var i = 0; i < 900/50; i++) {
+      for (var j = 0; j < 700/50; j++) {
+          noStroke();
+          if(this.lightArr[i][j]!=1) fill(0,0,0,255-this.time*7)
+          else fill(200,200,0,random(25,45));
+          rect(i*50,j*50,50,50)
+          this.lightArr[i][j] = 0;
+      }
+    }
+  }
+
+  }
   createMap(){
     this.groundItem = []
     this.mapTiles = []
     this.midGround = []
     this.foreGround = []
+    this.lightArr = [];
     for (var i = 0; i < 18; i++) {
       this.groundItem[i] = []
       this.mapTiles[i] = []
       this.midGround[i] = []
       this.foreGround[i] = []
+      this.lightArr[i] = [];
     }
     for (var i = 0; i < 18; i++) {
       for (var j = 0; j < 14; j++) {
@@ -64,6 +86,7 @@ class map{
       this.mapTiles[i][j] = []
       this.midGround[i][j] = []
       this.foreGround[i][j] = []
+      this.lightArr[i][j] = [];
     }
   }
   }
@@ -105,6 +128,24 @@ class map{
     player.x = 10;
     player.y = 10;
   }
+  mapDayNight(){
+    if(gameClock%40 == 0){
+      if(this.time == 100 || this.time == 0){
+        this.timeDir*=-1;
+      }
+      this.time += 1*this.timeDir
+    }
+  }
+  campfireTorchLight(i,j){
+    if(this.foreGround[i][j][0] == campfire){
+        this.lightArr[i][j]=1;
+        this.lightArr[i+1][j]=1;
+        this.lightArr[i-1][j]=1;
+        this.lightArr[i][j+1]=1;
+        this.lightArr[i][j-1]=1;
+}
+    }
+
 
 
 

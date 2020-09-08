@@ -25,9 +25,8 @@ function draw(){
   gameClock +=1;
   pMap.drawPMap();
   map.drawMap();
-
+  map.darken();
   if(player.isInCabin == true){
-
   image(cabinInside,width/2,height/2)
 }
   player.update();

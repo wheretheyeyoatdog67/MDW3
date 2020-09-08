@@ -64,6 +64,14 @@ class player {
       this.playerLeaveHouse()
     }
   }
+  torchLight(i,j){
+    if(inv.invArr[inv.curItem] == torch){
+      if(dist(i,j,this.x,this.y)<4){
+        map.lightArr[i][j]=1;
+      }
+
+    }
+  }
   collision(xCoord,yCoord){
     if(this.isInCabin==false){
     if(xCoord==-1 && this.x == 0) return true

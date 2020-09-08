@@ -59,6 +59,48 @@ switch(keyCode){
   break;
 
 
+  case 49:
+    //MAPMODE
+    inv.curItem = 0
+  break;
+  case 50:
+    //MAPMODE
+    inv.curItem = 1
+  break;
+  case 51:
+    //MAPMODE
+    inv.curItem = 2
+  break;
+  case 52:
+    //MAPMODE
+    inv.curItem = 3
+  break;
+  case 53:
+    //MAPMODE
+    inv.curItem = 4
+  break;
+  case 54:
+    //MAPMODE
+    inv.curItem = 5
+  break;
+  case 55:
+    //MAPMODE
+    inv.curItem = 6
+  break;
+  case 56:
+    //MAPMODE
+    inv.curItem = 7
+  break;
+  case 57:
+    //MAPMODE
+    inv.curItem = 8
+  break;
+  case 48:
+    //MAPMODE
+    inv.curItem = 9
+  break;
+
+
 }
 }
 
@@ -138,10 +180,16 @@ switch(inv.invArr[inv.curItem]){
     map.groundItem[x][y][0] = logs
   }
   break;
+
   default:
 
   }
 }
+
+
+
+
+
   if(dist(x,y,player.x,player.y)==1){
     if(map.foreGround[x][y][0]==berrybush){
       map.groundItem[player.x][player.y][0] = berries;
