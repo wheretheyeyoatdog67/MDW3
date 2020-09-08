@@ -73,31 +73,35 @@ class map{
   mapCheckNewRegion(){
     if(player.x < 0){
       player.x = 17;
+      mapGroup.prevX = mapGroup.curMapX
       mapGroup.curMapX  -=1;
-      mapGroup.addToMapGroup()
+      mapGroup.addToMapGroup(-1)
     }
     else if(player.x > 17){
       player.x = 0;
+      mapGroup.prevX = mapGroup.curMapX
       mapGroup.curMapX +=1;
-      mapGroup.addToMapGroup()
+      mapGroup.addToMapGroup(1)
 
     }
     else if(player.y < 0){
       player.y = 13;
+      mapGroup.prevY = mapGroup.curMapY
       mapGroup.curMapY -=1;
-      mapGroup.addToMapGroup()
+      mapGroup.addToMapGroup(-2)
 
     }
     else if(player.y > 13){
       player.y = 0;
+      mapGroup.prevX = mapGroup.curMapX
       mapGroup.curMapY  +=1;
-      mapGroup.addToMapGroup()
+      mapGroup.addToMapGroup(2)
     }
   }
   mapStartUp(){
     this.createMap();
     this.fillMap();
-    this.mapCheckNewRegion();
+    //this.mapCheckNewRegion();
     player.x = 10;
     player.y = 10;
   }

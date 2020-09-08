@@ -3,6 +3,8 @@ class mapGroup{
   this.mapGroups;
   this.curMapX = 10;
   this.curMapY = 10;
+  this.prevX =10;
+  this.prevY= 10;
   this.createMap();
   }
 
@@ -17,10 +19,16 @@ class mapGroup{
     }
   }
   }
-  addToMapGroup(){
+  addToMapGroup(l){
+
       if(this.mapGroups[this.curMapX][this.curMapY][0]==undefined){
-        this.mapGroups[this.curMapX][this.curMapY][0] = map.mapTiles
-        this.mapGroups[this.curMapX][this.curMapY][1] = map.foreGround
+
+          this.mapGroups[this.prevX][this.prevY][0] = map.mapTiles
+          this.mapGroups[this.prevX][this.prevY][1] = map.foreGround
+
+
+
+
         map.createMap();
         map.fillMap();
       }

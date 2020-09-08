@@ -16,7 +16,7 @@ function createWoodlandsBiome(){
         else if (rand < 35&& map.mapTiles[i][j]!=sand1) map.foreGround[i][j][0] = rock;
         else if (rand < 40&& map.mapTiles[i][j]!=sand1) map.foreGround[i][j][0] = rock2;
         else if (rand < 45&& map.mapTiles[i][j]!=sand1) map.foreGround[i][j][0] = berrybush;
-        else if (rand < 60 && map.mapTiles[i][j]!=sand1) map.midGround[i][j][0] = grassMid;
+        else if (rand < 60 && map.mapTiles[i][j]!=sand1 && map.mapTiles[i][j]!=water1) map.midGround[i][j][0] = grassMid;
         if (rand < 40 && map.mapTiles[i][j]==sand1) map.midGround[i][j][0] =reeds;
         if (rand > 99 && map.mapTiles[i][j]!=sand1) map.midGround[i][j][0] =mush;
         if(rand > 70) {
