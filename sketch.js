@@ -148,9 +148,13 @@ function preload() {
     turbine3 =  loadImage('Tiles/2by1/turbine3.png');
     turbineInv = loadImage('Tiles/2by1/turbine1.png');
     wireOff =  loadImage('Tiles/midGround/wireOff.png');
+    wireInv = loadImage('Tiles/midGround/wireOff.png');
     wireOn = loadImage('Tiles/midGround/wireOn.png');
     wireOffU =  loadImage('Tiles/midGround/wireOffU.png');
     wireOnU = loadImage('Tiles/midGround/wireOnU.png');
+    wireOnRL = loadImage('Tiles/midGround/wireOnRL.png');
+
+
     lampOff =  loadImage('Tiles/2by1/lampOff.png');
     lampOn = loadImage('Tiles/2by1/lampOn.png');
     lampInv=  loadImage('Tiles/2by1/lampOff.png');
@@ -164,8 +168,8 @@ function resize(){
   death.resize(500,200);
   lampOff.resize(50,100);
   lampOn.resize(50,100);
-  lampInv.resize(50,50);
-
+  lampInv.resize(40,50);
+  wireInv.resize(40,40);
 
   turbineInv.resize(50,50);
   turbine1.resize(50,100);

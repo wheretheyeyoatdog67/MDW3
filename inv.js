@@ -55,7 +55,7 @@ class inv {
     this.invArr[9] = campfire
     this.backPackArr[0] = furnaceOffInv;
     this.backPackArrItemCount[0] = 1;
-    this.backPackArr[1] = wireOff;
+    this.backPackArr[1] = wireInv;
     this.backPackArrItemCount[1] = 1;
     this.backPackArr[2] = lampInv;
     this.backPackArrItemCount[2] = 1;

@@ -25,8 +25,11 @@ class map{
       for (var j = 0; j < 700/50; j++) {
         player.torchLight(i,j);
         this.campfireTorchLight(i,j);
-        this.lampTorchLight(i,j);
+        if(this.midGround[i][j][0]== lampOn){
+          this.lampTorchLight(i,j);
+        }
         if(this.wireArr[i][j][0]!=undefined){
+          this.wireArr[i][j][0].checkConnectivity();
           this.wireArr[i][j][0].update();
         }
         if(this.lampArr[i][j][0]!=undefined){
@@ -80,6 +83,7 @@ class map{
       this.windVal = floor(random(1,30))
     }
   }
+
   animateTurbine(){
     if(gameClock%this.windVal == 0){
       this.turbineAnFrame+=1
@@ -212,58 +216,68 @@ class map{
   campfireTorchLight(i,j){
     if(this.foreGround[i][j][0] == campfire){
         this.lightArr[i][j]=1;
-        this.lightArr[i+1][j]=1;
-        this.lightArr[i-1][j]=1;
+
+
         this.lightArr[i][j+1]=1;
         this.lightArr[i][j-1]=1;
+        if(i>0){
+        this.lightArr[i-1][j]=1;
         this.lightArr[i-1][j+1]=1;
+        this.lightArr[i-1][j-1]=1;}
+        if(i<16){
+        this.lightArr[i+1][j]=1;
         this.lightArr[i+1][j-1]=1;
-        this.lightArr[i-1][j-1]=1;
         this.lightArr[i+1][j+1]=1;
-        this.lightArr[i-2][j]=1;
-        this.lightArr[i+2][j]=1;
-        this.lightArr[i][j-2]=1;
-        this.lightArr[i][j+2]=1;
+      }
         }
     }
 
     lampTorchLight(i,j){
       if(this.midGround[i][j][0] == lampOn){
-          this.lightArr[i][j]=1;
-          this.lightArr[i+1][j]=1;
-          this.lightArr[i-1][j]=1;
-          this.lightArr[i][j+1]=1;
-          this.lightArr[i][j-1]=1;
-          this.lightArr[i-1][j+1]=1;
-          this.lightArr[i+1][j-1]=1;
-          this.lightArr[i-1][j-1]=1;
-          this.lightArr[i+1][j+1]=1;
-          this.lightArr[i-2][j]=1;
-          this.lightArr[i+2][j]=1;
-          this.lightArr[i][j-2]=1;
-          this.lightArr[i][j+2]=1;
+        for (var l = 0; l < 3; l++) {
+          for (var m = 0; m < 3; m++) {
+            if(i+l <=17)this.lightArr[i+l][j+m]=1;
+            if(i-l >=0)this.lightArr[i-l][j-m]=1;
+            if(i+l <=17)this.lightArr[i+l][j-m]=1;
+            if(i-l>=0)this.lightArr[i-l][j+m]=1;
 
-          this.lightArr[i-2][j-2]=1;
-          this.lightArr[i+2][j-2]=1;
-          this.lightArr[i-2][j-2]=1;
-          this.lightArr[i+2][j+2]=1;
-          this.lightArr[i-2][j+2]=1;
-
-          this.lightArr[i-2][j-1]=1;
-          this.lightArr[i+2][j-1]=1;
-          this.lightArr[i-2][j+1]=1;
-          this.lightArr[i+2][j+1]=1;
-          this.lightArr[i-2][j+2]=1;
-
-          this.lightArr[i+1][j-2]=1;
-          this.lightArr[i-1][j+2]=1;
-          this.lightArr[i+1][j+2]=1;
-          this.lightArr[i-1][j-2]=1;
-
+          }
+        }
+          // this.lightArr[i][j]=1;
+          // this.lightArr[i+1][j]=1;
+          // this.lightArr[i-1][j]=1;
+          // this.lightArr[i][j+1]=1;
+          // this.lightArr[i][j-1]=1;
+          // this.lightArr[i-1][j+1]=1;
+          // this.lightArr[i+1][j-1]=1;
+          // this.lightArr[i-1][j-1]=1;
+          // this.lightArr[i+1][j+1]=1;
+          // this.lightArr[i-2][j]=1;
+          // this.lightArr[i+2][j]=1;
+          // this.lightArr[i][j-2]=1;
+          // this.lightArr[i][j+2]=1;
+          //
+          // this.lightArr[i-2][j-2]=1;
+          // this.lightArr[i+2][j-2]=1;
+          // this.lightArr[i-2][j-2]=1;
+          // this.lightArr[i+2][j+2]=1;
+          // this.lightArr[i-2][j+2]=1;
+          //
+          // this.lightArr[i-2][j-1]=1;
+          // this.lightArr[i+2][j-1]=1;
+          // this.lightArr[i-2][j+1]=1;
+          // this.lightArr[i+2][j+1]=1;
+          // this.lightArr[i-2][j+2]=1;
+          //
+          // this.lightArr[i+1][j-2]=1;
+          // this.lightArr[i-1][j+2]=1;
+          // this.lightArr[i+1][j+2]=1;
+          // this.lightArr[i-1][j-2]=1;
 
 
           }
-      }
+          }
+
 
 
 

@@ -120,12 +120,15 @@ let y = floor(mouseY/50);
 if(inv.backPack==false){
 switch(inv.invArr[inv.curItem]){
   case wandInv:
+    if(player.mana>=5){
     projectileArr.push(new magicAttact())
-    player.mana -= 5;
+    player.mana -= 5;}
   break;
   case tomb:
+  if(player.mana>=10){
     player.teleport(x,y,100)
     player.mana -= 10;
+  }
   break;
   case axe:
   if(map.foreGround[x][y][0] == tree ||map.foreGround[x][y][0] == tree2){
@@ -179,7 +182,7 @@ switch(inv.invArr[inv.curItem]){
     }
 
   break;
-  case wireOff:
+  case wireInv:
     if(dist(x,y,player.x,player.y)<=3){
       map.midGround[x][y][0]= wireOff;
       map.wireArr[x][y][0] = new wire(x,y);

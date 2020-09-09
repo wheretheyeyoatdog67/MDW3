@@ -77,6 +77,9 @@ class player {
         this.hunger = 100;
       }
       this.hunger-=1;
+      if(this.hunger<=0){
+        //this.health -= 10;
+      }
     }
   }
   manaRise(){
