@@ -197,6 +197,13 @@ switch(inv.invArr[inv.curItem]){
     map.groundItem[x][y][0] = logs
   }
   break;
+  case ebush:
+
+    if(dist(x,y,player.x,player.y)==1){
+          map.foreGround[x][y][0]= ebush
+
+}
+  break;
   case turbineInv:
   if(dist(x,y,player.x,player.y)<=2){
 
