@@ -16,6 +16,7 @@ class map{
     this.turbineAnFrame = 1
     this.wireArr = [];
     this.lampArr = [];
+    this.windVal = 5;
 }
   drawMap(){
     this.mapDayNight()
@@ -74,8 +75,13 @@ class map{
       rect(50*4+i*50,700,50,50)
     }
   }
+  windAlter(){
+    if(gameClock%(floor(random(200,250)) == 0)){
+      this.windVal = floor(random(1,30))
+    }
+  }
   animateTurbine(){
-    if(gameClock%5 == 0){
+    if(gameClock%this.windVal == 0){
       this.turbineAnFrame+=1
       if(this.turbineAnFrame==3) {
         this.turbineAnFrame = 0;
@@ -186,8 +192,9 @@ class map{
     this.createMap();
     this.fillMap();
     //this.mapCheckNewRegion();
-    player.x = 10;
-    player.y = 10;
+    player.teleport(10,10,500)
+    //player.x = 10;
+    //player.y = 10;
   }
   mapDayNight(){
     if(gameClock%50 == 0){

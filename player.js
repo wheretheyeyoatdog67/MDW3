@@ -7,6 +7,12 @@ class player {
     this.teleArr = [];
     this.isInCabin = false;
     this.houseLoc = [];
+    this.health = 100;
+    this.mana =100;
+    this.hunger = 100;
+    this.immune = false;
+    this.immuneTimer = 10;
+    this.isDead = false;
   }
   animate(){
     if(gameClock%20 == 0){
@@ -55,11 +61,46 @@ class player {
 
     image(this.curAnimation,(this.x*50)+25,(this.y*50)+25)
   }
+  playerDead(){
+    if(this.health < 0){
+      this.isDead = true;
+      this.health = 0;
+      fill(60,60,70,150);
+      rect(0,0,900,700);
+      noFill();
+      image(death,480,300)
+    }
+  }
+  hungerDrain(){
+    if(gameClock%200 == 0){
+      if(this.hunger>100){
+        this.hunger = 100;
+      }
+      this.hunger-=1;
+    }
+  }
+  manaRise(){
+    if(gameClock%100 == 0){
+      if(this.mana>=100){
+        this.mana = 100;
+      }else this.mana+=1;
+    }
+  }
+  immuneClock(){
+    if(this.immuneTimer < 0) this.immune = false
+    if(gameClock%5 == 0){
+      this.immuneTimer -=1;
+    }
+  }
   update(){
     this.animate();
     this.draw();
     this.fireProjectilesNrender();
     this.drawTele();
+    this.hungerDrain()
+    this.manaRise();
+    this.immuneClock();
+    this.playerDead()
     if(this.isInCabin == true){
       this.playerLeaveHouse()
     }

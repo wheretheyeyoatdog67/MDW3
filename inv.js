@@ -17,7 +17,6 @@ class inv {
     }
   }
   displayItemAmount(){
-
     for (var i = 0; i < this.invArr.length; i++) {
       if(this.itemCount[i]!=1){
         fill(255)
@@ -27,9 +26,9 @@ class inv {
       if(this.itemCount[i] <= 0){
         this.itemCount.splice(i,1)
         this.invArr.splice(i,1)
-
       }
     }
+
     if(this.backPack == true){
     for (var i = 0; i < this.backPackArrItemCount.length; i++) {
         if(this.backPackArrItemCount[i]!=1){
@@ -67,6 +66,7 @@ class inv {
     if(this.backPack) this.drawBackPack()
     this.drawInvItems();
     this.displayItemAmount();
+    this.displayHealth();
 
   }
 
@@ -97,4 +97,31 @@ class inv {
       else image(this.invArr[this.curItem],player.x*50+10,player.y*50+25)
     }
   }
+
+  displayHealth(){
+
+    let h = -692*player.health / 100;
+    let m = -692*player.mana / 100;
+    let hun =-692*player.hunger / 100;
+
+
+
+    strokeWeight(9)
+    fill(210,180,140);
+    stroke(70,40,70);
+    rect(890,0,25,700);
+    rect(915,0,25,700);
+    rect(940,0,25,700);
+
+    noStroke()
+    fill(255,0,0,170)
+    rect(892,700-5,20,h);
+    fill(120,0,255,190)
+    rect(919,700-5,20,m);
+    fill(130,205,0,170)
+    rect(944,700-5,20,hun);
+
+
+  }
+
 }

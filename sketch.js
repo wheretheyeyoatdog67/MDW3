@@ -4,12 +4,13 @@ var height = 700;
 var gameClock = 0;
 var iter = 0;
 var demArr = [];
+var pause = false;
 
 var projectileArr = [];
 
 function setup() {
 
-  createCanvas(900, 760);
+  createCanvas(1000, 760);
   resize();
   imageMode(CENTER)
   player = new player(4,0);
@@ -22,6 +23,7 @@ function setup() {
 }
 
 function draw(){
+  if(!player.isDead && !pause){
   background(255)
   gameClock +=1;
   pMap.drawPMap();
@@ -41,13 +43,14 @@ function draw(){
   if(map.turbineArr.length!=0){
       map.animateTurbine()
   }
-  if(dragingItem == true){
+  if(dragingItem == true && inv.backPack == true){
     dragItem(indexDrag);
   }
 
 
 
 
+}
 }
 
 
@@ -138,8 +141,8 @@ function preload() {
 
     dead1 = loadImage('PlayerSprite/demon/dead1.png');
     dead2= loadImage('PlayerSprite/demon/dead2.png');
-    demonDust= loadImage('PlayerSprite/demon/dead3.png');
-
+    demonDust= demonDust= loadImage('PlayerSprite/demon/dead3.png');
+    demonDustGround = loadImage('PlayerSprite/demon/dead3Ground.png');
     turbine1 =  loadImage('Tiles/2by1/turbine1.png');
     turbine2 =  loadImage('Tiles/2by1/turbine2.png');
     turbine3 =  loadImage('Tiles/2by1/turbine3.png');
@@ -151,12 +154,14 @@ function preload() {
     lampOff =  loadImage('Tiles/2by1/lampOff.png');
     lampOn = loadImage('Tiles/2by1/lampOn.png');
     lampInv=  loadImage('Tiles/2by1/lampOff.png');
+    death = loadImage('PlayerSprite/death.png');
 
 
 
 
 }
 function resize(){
+  death.resize(500,200);
   lampOff.resize(50,100);
   lampOn.resize(50,100);
   lampInv.resize(50,50);

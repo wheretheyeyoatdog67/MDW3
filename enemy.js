@@ -48,6 +48,7 @@ class enemy{
   }
   update(){
     this.draw();
+    this.playerCol();
     if(!this.isDead){
     this.animate();
     this.follow();}
@@ -59,11 +60,20 @@ class enemy{
   }
   animate(){
 
-    if(gameClock%10 == 0){
+    if(gameClock%5 == 0){
       if(this.animationFrame == 0 || this.animationFrame == 2){
         this.animationDir *=-1;
       }
       this.animationFrame+=1*this.animationDir
+    }
+  }
+  playerCol(){
+    if(this.x == player.x,this.y == player.y){
+      if(!player.immune){
+        player.health -= 10;
+        player.immune = true;
+        player.immuneTimer = 10;
+      }
     }
   }
   deathAnimation(){
@@ -72,7 +82,7 @@ class enemy{
       if(this.deadFrame<3)this.deadFrame+=1;
       if(this.deadFrame ==3){
         this.destroy = true;
-        map.groundItem[this.x][this.y][0]= demonDust;
+        map.groundItem[this.x][this.y][0]= demonDustGround;
         return 0;
       }
     }
@@ -82,41 +92,58 @@ class enemy{
 
   follow(){
 
-    if(gameClock%20 == 0){
-      if(player.x>this.x && map.demonArr[this.x+1][this.y][0]==undefined){
-        map.demonArr[this.x][this.y][0] = undefined;
-        this.x += 1;
+    if(gameClock%18 == 0){
+      if(player.x>this.x){
         this.dir = 1;
-        map.demonArr[this.x][this.y][0] = 1;
+        if( map.demonArr[this.x+1][this.y][0]==undefined){
+          map.demonArr[this.x][this.y][0] = undefined;
+          this.x += 1;
+          this.dir = 1;
+          map.demonArr[this.x][this.y][0] = 1;
+        }
+
       }
-      else if(player.x<this.x&& map.demonArr[this.x-1][this.y][0]==undefined){
-        map.demonArr[this.x][this.y][0] = undefined;
-        this.x -= 1;
+      else if(player.x<this.x){
         this.dir =2;
-        map.demonArr[this.x][this.y][0] = 1;
+        if(map.demonArr[this.x-1][this.y][0]==undefined){
+          map.demonArr[this.x][this.y][0] = undefined;
+          this.x -= 1;
 
+          map.demonArr[this.x][this.y][0] = 1;
+        }
       }
-      else if(player.y>this.y&& map.demonArr[this.x][this.y+1][0]==undefined){
-        map.demonArr[this.x][this.y][0] = undefined;
-        this.y += 1;
+
+      else if(player.y>this.y){
         this.dir =0;
-
-        map.demonArr[this.x][this.y][0] = 1;
+        if(map.demonArr[this.x][this.y+1][0]==undefined){
+          map.demonArr[this.x][this.y][0] = undefined;
+          this.y += 1;
+          this.dir =0;
+          map.demonArr[this.x][this.y][0] = 1;
+        }
       }
-      else if(player.y<this.y&& map.demonArr[this.x][this.y-1][0]==undefined){
-        map.demonArr[this.x][this.y][0] = undefined;
-        this.y -= 1;
+
+
+      }
+      else if(player.y<this.y){
         this.dir =3;
-        map.demonArr[this.x][this.y][0] = 1;
+        if(map.demonArr[this.x][this.y-1][0]==undefined){
 
+            map.demonArr[this.x][this.y][0] = undefined;
+            this.y -= 1;
+
+            map.demonArr[this.x][this.y][0] = 1;
+        }
       }
+
+
       else{
 
       }
 
 
   }
-  }
+
 
 
 }

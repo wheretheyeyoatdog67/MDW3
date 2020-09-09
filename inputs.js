@@ -102,6 +102,11 @@ switch(keyCode){
   case 82:
     map.devDestroyForGround();
   break;
+  case 80:
+  if(pause != true)
+    pause = true;
+  else pause = false;
+  break;
 
 
 }
@@ -116,9 +121,11 @@ if(inv.backPack==false){
 switch(inv.invArr[inv.curItem]){
   case wandInv:
     projectileArr.push(new magicAttact())
+    player.mana -= 5;
   break;
   case tomb:
     player.teleport(x,y,100)
+    player.mana -= 10;
   break;
   case axe:
   if(map.foreGround[x][y][0] == tree ||map.foreGround[x][y][0] == tree2){
