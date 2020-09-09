@@ -17,6 +17,9 @@ class map{
     this.wireArr = [];
     this.lampArr = [];
     this.windVal = 5;
+    this.prevX = 10;
+    this.prevY = 10;
+    this.wirePlacedUpdate = false;
 }
   drawMap(){
     this.mapDayNight()
@@ -29,8 +32,11 @@ class map{
           this.lampTorchLight(i,j);
         }
         if(this.wireArr[i][j][0]!=undefined){
+
           this.wireArr[i][j][0].checkConnectivity();
+
           this.wireArr[i][j][0].update();
+
         }
         if(this.lampArr[i][j][0]!=undefined){
           this.lampArr[i][j][0].update();
@@ -122,6 +128,7 @@ class map{
     this.demonArr = [];
     this.wireArr = [];
     this.lampArr = [];
+    this.turbineArr =[]
     for (var i = 0; i < 18; i++) {
       this.groundItem[i] = []
       this.mapTiles[i] = []
@@ -131,6 +138,7 @@ class map{
       this.demonArr[i] = [];
       this.wireArr[i] = [];
       this.lampArr[i] = [];
+
     }
     for (var i = 0; i < 18; i++) {
       for (var j = 0; j < 14; j++) {
@@ -142,6 +150,7 @@ class map{
       this.demonArr[i][j] = [];
       this.wireArr[i][j] = [];
       this.lampArr[i][j] = [];
+
     }
   }
   }
@@ -164,6 +173,7 @@ class map{
     if(player.x < 0){
       player.x = 17;
       mapGroup.prevX = mapGroup.curMapX
+      mapGroup.prevY = mapGroup.curMapY
       mapGroup.curMapX  -=1;
       mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(-1)
@@ -171,6 +181,7 @@ class map{
     else if(player.x > 17){
       player.x = 0;
       mapGroup.prevX = mapGroup.curMapX
+      mapGroup.prevY = mapGroup.curMapY
       mapGroup.curMapX +=1;
       mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(1)
@@ -179,6 +190,7 @@ class map{
     else if(player.y < 0){
       player.y = 13;
       mapGroup.prevY = mapGroup.curMapY
+      mapGroup.prevX = mapGroup.curMapX
       mapGroup.curMapY -=1;
       mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(-2)
@@ -187,6 +199,7 @@ class map{
     else if(player.y > 13){
       player.y = 0;
       mapGroup.prevY = mapGroup.curMapY
+      mapGroup.prevX = mapGroup.curMapX
       mapGroup.curMapY  +=1;
       mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(2)

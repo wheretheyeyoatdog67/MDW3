@@ -186,6 +186,7 @@ switch(inv.invArr[inv.curItem]){
     if(dist(x,y,player.x,player.y)<=3){
       map.midGround[x][y][0]= wireOff;
       map.wireArr[x][y][0] = new wire(x,y);
+      map.wirePlacedUpdate = true;
     }
 
   break;
@@ -194,6 +195,7 @@ switch(inv.invArr[inv.curItem]){
       map.midGround[x][y-1][0]= lampOff;
       map.midGround[x][y][0]= transparent;
       map.lampArr[x][y][0] = new lamp(x,y);
+      map.wirePlacedUpdate = true;
     }
   break;
   case shovel:
@@ -221,8 +223,16 @@ switch(inv.invArr[inv.curItem]){
       map.foreGround[x][y][0] = transparent;
       map.foreGround[x][y-1][0] = turbine1;
       map.turbineArr.push([x,y-1])
+      map.wirePlacedUpdate = true;
     }
   }
+  break;
+  case mush:
+  player.mana += 25;
+  for (var i = 0; i < inv.invArr.length; i++) {
+    if(inv.invArr[i] == mush)inv.itemCount[i]-=1;
+  }
+
   break;
 
   default:
@@ -267,7 +277,6 @@ switch(inv.invArr[inv.curItem]){
     }else if(dragingItem == true) {
       if(x>=4 && y >= 14){
         let l = x-4;
-        console.log(l)
         let temp = inv.invArr[l]
         let temp2 = inv.itemCount[l]
         inv.invArr[l] = inv.backPackArr[indexDrag];

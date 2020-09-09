@@ -32,7 +32,7 @@ class magicAttact{
     if (floor((this.projLoc[0]-25)/50) <= 0 || floor((this.projLoc[0]-25)/50) >= 17 || floor((this.projLoc[1]-25)/50) <= 0 || floor((this.projLoc[1]-25)/50) >= 13) this.removeit = true;
   }
   move(){
-    if(gameClock%1 == 0){
+    if(gameClock%3 == 0){
     this.it+=50;
   }
 }

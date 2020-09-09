@@ -24,6 +24,8 @@ class mapGroup{
     this.mapGroups[this.prevX][this.prevY][0] = map.mapTiles
     this.mapGroups[this.prevX][this.prevY][1] = map.foreGround
     this.mapGroups[this.prevX][this.prevY][2] = map.midGround
+    this.mapGroups[this.prevX][this.prevY][3] = map.wireArr
+    this.mapGroups[this.prevX][this.prevY][4] = map.turbineArr
   }
   addToMapGroup(l){
       print('<><><><><><>');
@@ -46,9 +48,12 @@ class mapGroup{
   }
   reCallMapTiles(){
     map.mapTiles = [];
+    map.wireArr = [];
     map.mapTiles = this.mapGroups[this.curMapX][this.curMapY][0];
     map.foreGround = this.mapGroups[this.curMapX][this.curMapY][1]
     map.midGround = this.mapGroups[this.curMapX][this.curMapY][2]
+    map.wireArr = this.mapGroups[this.curMapX][this.curMapY][3]
+    map.turbineArr = this.mapGroups[this.curMapX][this.curMapY][4]
   }
 
 }

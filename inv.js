@@ -24,8 +24,8 @@ class inv {
         text(this.itemCount[i],230+i*50,740)
       }
       if(this.itemCount[i] <= 0){
-        this.itemCount.splice(i,1)
-        this.invArr.splice(i,1)
+        this.itemCount[i] = 1;
+        this.invArr[i] = transparent
       }
     }
 
@@ -83,6 +83,14 @@ class inv {
     }
     for (var i = 0; i < this.backPackArr.length; i++) {
       //175+i*50
+      if(this.backPackArr[i] == transparent && this.backPackArr[i+1]!= undefined){
+        let temp = this.backPackArr[i];
+        let tempC = this.backPackArrItemCount[i];
+        this.backPackArr[i] = this.backPackArr[i+1]
+        this.backPackArrItemCount[i] = this.backPackArrItemCount[i+1]
+        this.backPackArr[i+1] = temp
+        this.backPackArrItemCount[i+1] = tempC
+      }
       image(this.backPackArr[i],175+i*50,175)
     }
   }

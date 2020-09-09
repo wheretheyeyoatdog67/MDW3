@@ -26,8 +26,9 @@ function draw(){
   if(!player.isDead && !pause){
   background(255)
   gameClock +=1;
-  pMap.drawPMap();
+
   map.drawMap();
+  pMap.drawPMap();
   demonUpdater();
 
 
