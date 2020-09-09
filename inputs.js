@@ -9,7 +9,7 @@ function keyPressed() {
 switch(keyCode){
   case 65:
   if(player.collision(-1,0)){
-    console.log("col")
+
     player.x -=1
     player.lastDir = 2;
     player.curAnimation = pl1;
@@ -99,6 +99,9 @@ switch(keyCode){
     //MAPMODE
     inv.curItem = 9
   break;
+  case 82:
+    map.devDestroyForGround();
+  break;
 
 
 }
@@ -107,8 +110,8 @@ switch(keyCode){
 function mouseClicked() {
 let x = floor(mouseX/50);
 let y = floor(mouseY/50);
-console.log(x)
-console.log(y)
+// console.log(x)
+// console.log(y)
 if(inv.backPack==false){
 switch(inv.invArr[inv.curItem]){
   case wandInv:
@@ -169,6 +172,20 @@ switch(inv.invArr[inv.curItem]){
     }
 
   break;
+  case wireOff:
+    if(dist(x,y,player.x,player.y)<=3){
+      map.midGround[x][y][0]= wireOff;
+      map.wireArr[x][y][0] = new wire(x,y);
+    }
+
+  break;
+  case lampInv:
+    if(dist(x,y,player.x,player.y)<=3){
+      map.midGround[x][y-1][0]= lampOff;
+      map.midGround[x][y][0]= transparent;
+      map.lampArr[x][y][0] = new lamp(x,y);
+    }
+  break;
   case shovel:
   if(map.foreGround[x][y][0] == ebush){
     if(dist(x,y,player.x,player.y)==1){
@@ -178,6 +195,16 @@ switch(inv.invArr[inv.curItem]){
   }else if(map.midGround[x][y][0] == treeDead){
     map.midGround[x][y][0] = undefined
     map.groundItem[x][y][0] = logs
+  }
+  break;
+  case turbineInv:
+  if(dist(x,y,player.x,player.y)<=2){
+
+    if(map.foreGround[x][y][0]== undefined &&map.foreGround[x][y-1][0]== undefined){
+      map.foreGround[x][y][0] = transparent;
+      map.foreGround[x][y-1][0] = turbine1;
+      map.turbineArr.push([x,y-1])
+    }
   }
   break;
 
@@ -212,7 +239,7 @@ switch(inv.invArr[inv.curItem]){
         player.x = 11;
         player.y = 11;
       }
-      }
+    }
     if(inv.backPack == true ){
       if(dragingItem!=true){
       if(x>=3){let l = x-3;

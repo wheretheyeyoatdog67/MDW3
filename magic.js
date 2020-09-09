@@ -8,6 +8,8 @@ class magicAttact{
     this.it = 0;
     this.projLoc = [];
     this.removeit = false;
+    this.metX;
+    this.metY;
   }
   draw(){
     push();
@@ -25,6 +27,8 @@ class magicAttact{
     pop();
     this.projLoc[0] = this.x +(  this.it)*cos(this.rot);
     this.projLoc[1] = this.y + ( this.it)*sin(this.rot);
+    this.metX=floor((this.projLoc[0]-25)/50)
+    this.metY=floor((this.projLoc[1]-25)/50)
     if (floor((this.projLoc[0]-25)/50) <= 0 || floor((this.projLoc[0]-25)/50) >= 17 || floor((this.projLoc[1]-25)/50) <= 0 || floor((this.projLoc[1]-25)/50) >= 13) this.removeit = true;
   }
   move(){
@@ -33,7 +37,15 @@ class magicAttact{
   }
 }
   collision(){
-
+    for (var i = demArr.length-1; i >= 0; i--) {
+      if(this.metX == demArr[i].x && this.metY == demArr[i].y && demArr[i].isDead== false){
+        demArr[i].index = i;
+        demArr[i].isDead = true;
+        map.demonArr[demArr[i].x][demArr[i].y][0] = undefined;
+        this.removeit = true;
+        return true;
+      }
+    }
     if(map.foreGround[floor((this.projLoc[0]-25)/50)][floor((this.projLoc[1]-25)/50)][0] != undefined){this.removeit = true
     return true}else return false
   }

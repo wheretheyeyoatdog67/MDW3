@@ -9,25 +9,47 @@ class map{
     this.timeDir = 1;
     this.lightArr = [];
     this.campfireArr = [];
+    this.demonArr = [];
+    this.turbineArr = [];
+    this.turbineAnimation = [turbine1,turbine2,turbine3];
+    this.turbineDir = 1;
+    this.turbineAnFrame = 1
+    this.wireArr = [];
+    this.lampArr = [];
 }
   drawMap(){
     this.mapDayNight()
+
     for (var i = 0; i < 900/50; i++) {
       for (var j = 0; j < 700/50; j++) {
         player.torchLight(i,j);
         this.campfireTorchLight(i,j);
+        this.lampTorchLight(i,j);
+        if(this.wireArr[i][j][0]!=undefined){
+          this.wireArr[i][j][0].update();
+        }
+        if(this.lampArr[i][j][0]!=undefined){
+          this.lampArr[i][j][0].update();
+        }
         imageMode(CORNER)
         //if(!player.isInCabin){
           strokeWeight(1)
           rect(50*i,50*j,50,50)
         image(this.mapTiles[i][j],i*50,j*50);
-        if(this.midGround[i][j][0]!=undefined) image(this.midGround[i][j][0],i*50,j*50)
+        if(this.midGround[i][j][0]!=undefined){
+        if(this.midGround[i][j][0] == lampOn||this.midGround[i][j][0]==lampOff){
+          this.twobytwoArr.push([i,j,this.midGround[i][j][0]])
+        }else image(this.midGround[i][j][0],i*50,j*50)}
         if(this.groundItem[i][j][0]!=undefined) image(this.groundItem[i][j][0],i*50+10,j*50+10)
         if(this.foreGround[i][j][0]!=undefined)
         {
           if(this.foreGround[i][j][0]==cabin ||this.foreGround[i][j][0]==tree6 ||this.foreGround[i][j][0]==tree5|| this.foreGround[i][j][0]==furnaceOff||this.foreGround[i][j][0]==furnace){
             this.twobytwoArr.push([i,j,this.foreGround[i][j][0]])
-          }else image(this.foreGround[i][j][0],i*50,j*50)
+          }else if(this.foreGround[i][j][0]==turbine1||this.foreGround[i][j][0]==turbine2||this.foreGround[i][j][0]==turbine3){
+            this.twobytwoArr.push([i,j,this.foreGround[i][j][0]])
+          }
+          else image(this.foreGround[i][j][0],i*50,j*50)
+
         }
 
         stroke(70,40,70);
@@ -52,6 +74,20 @@ class map{
       rect(50*4+i*50,700,50,50)
     }
   }
+  animateTurbine(){
+    if(gameClock%5 == 0){
+      this.turbineAnFrame+=1
+      if(this.turbineAnFrame==3) {
+        this.turbineAnFrame = 0;
+
+      }
+
+    }
+    for (var i = 0; i < this.turbineArr.length; i++) {
+      this.foreGround[this.turbineArr[i][0]][this.turbineArr[i][1]][0]=this.turbineAnimation[this.turbineAnFrame]
+    }
+  }
+
 
   darken(){
     if(this.time < 40){
@@ -73,12 +109,18 @@ class map{
     this.midGround = []
     this.foreGround = []
     this.lightArr = [];
+    this.demonArr = [];
+    this.wireArr = [];
+    this.lampArr = [];
     for (var i = 0; i < 18; i++) {
       this.groundItem[i] = []
       this.mapTiles[i] = []
       this.midGround[i] = []
       this.foreGround[i] = []
       this.lightArr[i] = [];
+      this.demonArr[i] = [];
+      this.wireArr[i] = [];
+      this.lampArr[i] = [];
     }
     for (var i = 0; i < 18; i++) {
       for (var j = 0; j < 14; j++) {
@@ -87,8 +129,23 @@ class map{
       this.midGround[i][j] = []
       this.foreGround[i][j] = []
       this.lightArr[i][j] = [];
+      this.demonArr[i][j] = [];
+      this.wireArr[i][j] = [];
+      this.lampArr[i][j] = [];
     }
   }
+  }
+
+  devDestroyForGround(){
+    this.foreGround = [];
+    for (var i = 0; i < 18; i++) {
+      this.foreGround[i] = []
+    }
+    for (var i = 0; i < 18; i++) {
+      for (var j = 0; j < 14; j++) {
+          this.foreGround[i][j] = []
+      }}
+
   }
   fillMap(){
     createWoodlandsBiome();
@@ -98,12 +155,14 @@ class map{
       player.x = 17;
       mapGroup.prevX = mapGroup.curMapX
       mapGroup.curMapX  -=1;
+      mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(-1)
     }
     else if(player.x > 17){
       player.x = 0;
       mapGroup.prevX = mapGroup.curMapX
       mapGroup.curMapX +=1;
+      mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(1)
 
     }
@@ -111,13 +170,15 @@ class map{
       player.y = 13;
       mapGroup.prevY = mapGroup.curMapY
       mapGroup.curMapY -=1;
+      mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(-2)
 
     }
     else if(player.y > 13){
       player.y = 0;
-      mapGroup.prevX = mapGroup.curMapX
+      mapGroup.prevY = mapGroup.curMapY
       mapGroup.curMapY  +=1;
+      mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(2)
     }
   }
@@ -129,7 +190,12 @@ class map{
     player.y = 10;
   }
   mapDayNight(){
-    if(gameClock%40 == 0){
+    if(gameClock%50 == 0){
+      if(this.time == 0){
+        for (var i = 0; i < 5; i++) {
+        demArr.push(new enemy())
+      }
+      }
       if(this.time == 100 || this.time == 0){
         this.timeDir*=-1;
       }
@@ -143,8 +209,54 @@ class map{
         this.lightArr[i-1][j]=1;
         this.lightArr[i][j+1]=1;
         this.lightArr[i][j-1]=1;
-}
+        this.lightArr[i-1][j+1]=1;
+        this.lightArr[i+1][j-1]=1;
+        this.lightArr[i-1][j-1]=1;
+        this.lightArr[i+1][j+1]=1;
+        this.lightArr[i-2][j]=1;
+        this.lightArr[i+2][j]=1;
+        this.lightArr[i][j-2]=1;
+        this.lightArr[i][j+2]=1;
+        }
     }
+
+    lampTorchLight(i,j){
+      if(this.midGround[i][j][0] == lampOn){
+          this.lightArr[i][j]=1;
+          this.lightArr[i+1][j]=1;
+          this.lightArr[i-1][j]=1;
+          this.lightArr[i][j+1]=1;
+          this.lightArr[i][j-1]=1;
+          this.lightArr[i-1][j+1]=1;
+          this.lightArr[i+1][j-1]=1;
+          this.lightArr[i-1][j-1]=1;
+          this.lightArr[i+1][j+1]=1;
+          this.lightArr[i-2][j]=1;
+          this.lightArr[i+2][j]=1;
+          this.lightArr[i][j-2]=1;
+          this.lightArr[i][j+2]=1;
+
+          this.lightArr[i-2][j-2]=1;
+          this.lightArr[i+2][j-2]=1;
+          this.lightArr[i-2][j-2]=1;
+          this.lightArr[i+2][j+2]=1;
+          this.lightArr[i-2][j+2]=1;
+
+          this.lightArr[i-2][j-1]=1;
+          this.lightArr[i+2][j-1]=1;
+          this.lightArr[i-2][j+1]=1;
+          this.lightArr[i+2][j+1]=1;
+          this.lightArr[i-2][j+2]=1;
+
+          this.lightArr[i+1][j-2]=1;
+          this.lightArr[i-1][j+2]=1;
+          this.lightArr[i+1][j+2]=1;
+          this.lightArr[i-1][j-2]=1;
+
+
+
+          }
+      }
 
 
 

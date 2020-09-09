@@ -19,12 +19,21 @@ class mapGroup{
     }
   }
   }
-  addToMapGroup(l){
 
+  addPrevMapGroup(){
+    this.mapGroups[this.prevX][this.prevY][0] = map.mapTiles
+    this.mapGroups[this.prevX][this.prevY][1] = map.foreGround
+    this.mapGroups[this.prevX][this.prevY][2] = map.midGround
+  }
+  addToMapGroup(l){
+      print('<><><><><><>');
+      print('curX ' + this.curMapX);
+      print('curY ' + this.curMapY);
+      print('prevX ' + this.prevX);
+      print('prevY ' + this.prevY);
       if(this.mapGroups[this.curMapX][this.curMapY][0]==undefined){
 
-          this.mapGroups[this.prevX][this.prevY][0] = map.mapTiles
-          this.mapGroups[this.prevX][this.prevY][1] = map.foreGround
+
 
 
 
@@ -39,6 +48,7 @@ class mapGroup{
     map.mapTiles = [];
     map.mapTiles = this.mapGroups[this.curMapX][this.curMapY][0];
     map.foreGround = this.mapGroups[this.curMapX][this.curMapY][1]
+    map.midGround = this.mapGroups[this.curMapX][this.curMapY][2]
   }
 
 }

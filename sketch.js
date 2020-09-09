@@ -3,6 +3,7 @@ var width = 900;
 var height = 700;
 var gameClock = 0;
 var iter = 0;
+var demArr = [];
 
 var projectileArr = [];
 
@@ -25,7 +26,11 @@ function draw(){
   gameClock +=1;
   pMap.drawPMap();
   map.drawMap();
+  demonUpdater();
+
+
   map.darken();
+
   if(player.isInCabin == true){
   image(cabinInside,width/2,height/2)
 }
@@ -33,7 +38,9 @@ function draw(){
 
   inv.update();
 
-
+  if(map.turbineArr.length!=0){
+      map.animateTurbine()
+  }
   if(dragingItem == true){
     dragItem(indexDrag);
   }
@@ -113,8 +120,64 @@ function preload() {
     tree5 = loadImage('Tiles/foreGround/tree5.png');
     tree6 = loadImage('Tiles/foreGround/tree6.png');
     cabinInside = loadImage('Cabin/insideCrop.png');
+
+    df1 = loadImage('PlayerSprite/demon/df1.png');
+    dl1 = loadImage('PlayerSprite/demon/dl1.png');
+    dr1 = loadImage('PlayerSprite/demon/dr1.png');
+    du1 = loadImage('PlayerSprite/demon/du1.png');
+
+    df2 = loadImage('PlayerSprite/demon/df2.png');
+    dl2 = loadImage('PlayerSprite/demon/dl2.png');
+    dr2 = loadImage('PlayerSprite/demon/dr2.png');
+    du2 = loadImage('PlayerSprite/demon/du2.png');
+
+    df3 = loadImage('PlayerSprite/demon/df3.png');
+    dl3 = loadImage('PlayerSprite/demon/dl3.png');
+    dr3 = loadImage('PlayerSprite/demon/dr3.png');
+    du3 = loadImage('PlayerSprite/demon/du3.png');
+
+    dead1 = loadImage('PlayerSprite/demon/dead1.png');
+    dead2= loadImage('PlayerSprite/demon/dead2.png');
+    demonDust= loadImage('PlayerSprite/demon/dead3.png');
+
+    turbine1 =  loadImage('Tiles/2by1/turbine1.png');
+    turbine2 =  loadImage('Tiles/2by1/turbine2.png');
+    turbine3 =  loadImage('Tiles/2by1/turbine3.png');
+    turbineInv = loadImage('Tiles/2by1/turbine1.png');
+    wireOff =  loadImage('Tiles/midGround/wireOff.png');
+    wireOn = loadImage('Tiles/midGround/wireOn.png');
+    wireOffU =  loadImage('Tiles/midGround/wireOffU.png');
+    wireOnU = loadImage('Tiles/midGround/wireOnU.png');
+    lampOff =  loadImage('Tiles/2by1/lampOff.png');
+    lampOn = loadImage('Tiles/2by1/lampOn.png');
+    lampInv=  loadImage('Tiles/2by1/lampOff.png');
+
+
+
+
 }
 function resize(){
+  lampOff.resize(50,100);
+  lampOn.resize(50,100);
+  lampInv.resize(50,50);
+
+
+  turbineInv.resize(50,50);
+  turbine1.resize(50,100);
+  turbine2.resize(50,100);
+  turbine3.resize(50,100);
+  df1.resize(50,50);
+  dl1.resize(50,50);
+  dr1.resize(50,50);
+  du1.resize(50,50);
+  df2.resize(50,50);
+  dl2.resize(50,50);
+  dr2.resize(50,50);
+  du2.resize(50,50);
+  df3.resize(50,50);
+  dl3.resize(50,50);
+  dr3.resize(50,50);
+  du3.resize(50,50);
   cabinInside.resize(600,450);
   tree6.resize(50,100);
   campfire.resize(50,50);

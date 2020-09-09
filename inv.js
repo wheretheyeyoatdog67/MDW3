@@ -47,13 +47,16 @@ class inv {
     this.invArr[0] = pickaxe;
     this.invArr[1] = axe;
     this.invArr[2] = shovel;
-    this.invArr[3] = spearInv
+    this.invArr[3] = lampInv
     this.invArr[4] = wandInv;
     this.invArr[5] = tomb;
     this.invArr[6] = torch;
-    this.invArr[7] = cabinInv
-    this.invArr[8] = furnaceOffInv
+    this.invArr[7] = wireOff
+    this.invArr[8] = turbineInv
     this.invArr[9] = campfire
+    this.backPackArr[0] = furnaceOffInv;
+    this.backPackArr[1] = cabinInv;
+    this.backPackArr[2] = spearInv;
   }
 
   update(){
