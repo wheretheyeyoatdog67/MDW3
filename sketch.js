@@ -162,10 +162,17 @@ function preload() {
     death = loadImage('PlayerSprite/death.png');
 
 
+    shell1 = loadImage('Tiles/Lake/shells1.png');
+    shell2 = loadImage('Tiles/Lake/shells2.png');
+    shell3 = loadImage('Tiles/Lake/shells3.png');
 
 
 }
 function resize(){
+  shell1.resize(20,20);
+  shell2.resize(20,20);
+  shell3.resize(20,20);
+
   death.resize(500,200);
   lampOff.resize(50,100);
   lampOn.resize(50,100);

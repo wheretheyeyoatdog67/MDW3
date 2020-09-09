@@ -20,6 +20,7 @@ class map{
     this.prevX = 10;
     this.prevY = 10;
     this.wirePlacedUpdate = false;
+    this.waterTiles = [];
 }
   drawMap(){
     this.mapDayNight()
@@ -68,7 +69,7 @@ class map{
           else image(this.foreGround[i][j][0],i*50,j*50)
 
         }
-
+        this.drawWaterTiles(i,j)
         stroke(70,40,70);
         strokeWeight(10)
         noFill()
@@ -136,6 +137,7 @@ class map{
     this.wireArr = [];
     this.lampArr = [];
     this.turbineArr =[]
+    this.waterTiles = [];
     for (var i = 0; i < 18; i++) {
       this.groundItem[i] = []
       this.mapTiles[i] = []
@@ -145,6 +147,7 @@ class map{
       this.demonArr[i] = [];
       this.wireArr[i] = [];
       this.lampArr[i] = [];
+      this.waterTiles[i] = [];
 
     }
     for (var i = 0; i < 18; i++) {
@@ -157,6 +160,7 @@ class map{
       this.demonArr[i][j] = [];
       this.wireArr[i][j] = [];
       this.lampArr[i][j] = [];
+      this.waterTiles[i][j] = [];
 
     }
   }
@@ -174,7 +178,10 @@ class map{
 
   }
   fillMap(){
-    createWoodlandsBiome();
+    if(random(0,100)<60){
+      createWoodlandsBiome();
+    }
+    else createOceanBiome();
   }
   mapCheckNewRegion(){
     if(player.x < 0){
@@ -251,7 +258,12 @@ class map{
       }
         }
     }
-
+    drawWaterTiles(i,j){
+      if(this.waterTiles[i][j][0]==1){
+        fill(0,0,255,(i+j)*7)
+        rect(i*50,j*50,50,50)
+      }
+    }
     lampTorchLight(i,j){
       if(this.midGround[i][j][0] == lampOn){
         for (var l = 0; l < 3; l++) {

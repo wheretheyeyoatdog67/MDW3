@@ -9,7 +9,10 @@ function createWoodlandsBiome(){
       if(rand < 50) map.mapTiles[i][j] = grass
       else if (rand >= 50) map.mapTiles[i][j] = grass2
       if (dist(i,j,randomX,randomY)<=3 && hasLake == 1)map.mapTiles[i][j] = sand1;
-      if (dist(i,j,randomX,randomY)<=2+floor(random(-1,1))&& hasLake == 1)map.mapTiles[i][j] = water1;
+      if (dist(i,j,randomX,randomY)<=2+floor(random(-1,1))&& hasLake == 1){
+        map.mapTiles[i][j] = water1;
+        map.waterTiles[i][j][0] = 1;
+      }
       if(map.mapTiles[i][j]!=water1 && map.foreGround[i][j][0]!= transparent && map.midGround[i][j][0]!= transparent){
         if(rand < 20&& map.mapTiles[i][j]!=sand1) map.foreGround[i][j][0] = tree;
         else if (rand < 30&& map.mapTiles[i][j]!=sand1) map.foreGround[i][j][0] = tree2;

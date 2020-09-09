@@ -27,6 +27,7 @@ class mapGroup{
     this.mapGroups[this.prevX][this.prevY][3] = map.wireArr
     this.mapGroups[this.prevX][this.prevY][4] = map.turbineArr
     this.mapGroups[this.prevX][this.prevY][5] = map.lampArr
+    this.mapGroups[this.prevX][this.prevY][6] = map.waterTiles
   }
   addToMapGroup(l){
       print('<><><><><><>');
@@ -57,6 +58,7 @@ class mapGroup{
     map.wireArr = this.mapGroups[this.curMapX][this.curMapY][3]
     map.turbineArr = this.mapGroups[this.curMapX][this.curMapY][4]
     map.lampArr = this.mapGroups[this.curMapX][this.curMapY][5]
+    map.waterTiles = this.mapGroups[this.curMapX][this.curMapY][6]
   }
 
 }
