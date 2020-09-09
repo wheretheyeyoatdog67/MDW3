@@ -18,8 +18,10 @@ class magicAttact{
     //fill(255)
     strokeWeight(1)
     fill(random(120,200),0,255)
-    ellipse(this.it+random(0,20),0,random(10,40),random(10,15))
-    ellipse(this.it-random(0,20),0,random(10,40),random(10,15))
+    noStroke()
+    ellipse(this.it+random(0,20),0,25,20)
+    ellipse(this.it-random(0,20),0,random(30,45),random(10,15))
+
     ellipse(this.it,10,5,5)
     ellipse(this.it+10,-10,5,5)
     noFill();
@@ -38,7 +40,7 @@ class magicAttact{
 }
   collision(){
     for (var i = demArr.length-1; i >= 0; i--) {
-      if(this.metX == demArr[i].x && this.metY == demArr[i].y && demArr[i].isDead== false){
+      if(demArr[i].isDead== false && dist(this.metX,this.metY, demArr[i].x, demArr[i].y) <1.5 ){
         demArr[i].index = i;
         demArr[i].isDead = true;
         map.demonArr[demArr[i].x][demArr[i].y][0] = undefined;

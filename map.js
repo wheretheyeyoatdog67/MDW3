@@ -39,6 +39,13 @@ class map{
 
         }
         if(this.lampArr[i][j][0]!=undefined){
+
+          this.lampArr[i][j][0].checkConnectivity();
+
+          this.lampArr[i][j][0].update();
+
+        }
+        if(this.lampArr[i][j][0]!=undefined){
           this.lampArr[i][j][0].update();
         }
         imageMode(CORNER)
