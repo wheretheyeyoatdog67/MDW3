@@ -20,6 +20,7 @@ class map{
     this.prevX = 10;
     this.prevY = 10;
     this.wirePlacedUpdate = false;
+
     this.waterTiles = [];
     this.animalArr = [];
     this.plantArr = [];
@@ -68,7 +69,10 @@ class map{
           }else if(this.foreGround[i][j][0]==turbine1||this.foreGround[i][j][0]==turbine2||this.foreGround[i][j][0]==turbine3){
             this.twobytwoArr.push([i,j,this.foreGround[i][j][0]])
           }
-          else image(this.foreGround[i][j][0],i*50,j*50)
+          else {
+            image(this.foreGround[i][j][0],i*50,j*50)
+            this.healthBar(i,j)
+          }
 
         }
         if(this.animalArr[i][j][0]!=undefined)this.animalArr[i][j][0].update()
@@ -108,7 +112,15 @@ class map{
       this.windVal = floor(random(1,30))
     }
   }
-
+  healthBar(i,j){
+    if(this.foreGround[i][j][1]!= undefined  &&this.foreGround[i][j][1] != 100 && gameClock - this.foreGround[i][j][2] < 50){
+      strokeWeight(2)
+      fill(255,0,0)
+      rect(i*50+4,j*50+45,40,5)
+      fill(100,255,0)
+      rect(i*50+4,j*50+45,40*this.foreGround[i][j][1]/100,5)
+    }
+  }
   animateTurbine(){
     if(gameClock%this.windVal == 0){
       this.turbineAnFrame+=1
@@ -151,8 +163,10 @@ class map{
     this.waterTiles = [];
     this.animalArr = [];
     this.plantArr = [];
+
     demArr = []
     for (var i = 0; i < 18; i++) {
+
       this.groundItem[i] = []
       this.mapTiles[i] = []
       this.midGround[i] = []
@@ -164,6 +178,7 @@ class map{
       this.waterTiles[i] = [];
       this.animalArr[i] = [];
       this.plantArr[i] = [];
+
 
     }
     for (var i = 0; i < 18; i++) {
@@ -179,6 +194,7 @@ class map{
       this.waterTiles[i][j] = [];
       this.animalArr[i][j] = [];
       this.plantArr[i][j] = [];
+
 
     }
   }

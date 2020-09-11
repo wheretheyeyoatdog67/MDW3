@@ -6,6 +6,7 @@ class inv {
   this.itemCount = [];
   this.backPackArr = [];
   this.backPackArrItemCount = [];
+  //this.curItemAnimation = false;
   this.fillInv();
   this.invCountItems();
   }

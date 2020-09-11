@@ -1,7 +1,7 @@
 var dragingItem = false;
 var indexDrag;
 var indexPos;
-
+var lastHit = 0;
 function keyPressed() {
 
 //MOVEMENT WASD
@@ -148,19 +148,38 @@ switch(inv.invArr[inv.curItem]){
   case axe:
   if(map.foreGround[x][y][0] == tree ||map.foreGround[x][y][0] == tree2){
     if(dist(x,y,player.x,player.y)==1){
+      lastHit = gameClock
+      if(map.foreGround[x][y][1]>0){
+
+        map.foreGround[x][y][1] -= 35
+        map.foreGround[x][y][2] =gameClock
+      }
+      if(map.foreGround[x][y][1]<0){
       map.midGround[x][y][0] = treeDead
       map.foreGround[x][y][0] = undefined
+      map.foreGround[x][y][1] = undefined
       map.groundItem[x][y][0] = logs
+      map.foreGround[x][y][2] =undefined
       player.xp+=2;
+    }
     }
   }
   break;
   case pickaxe:
   if(map.foreGround[x][y][0] == rock ||map.foreGround[x][y][0] == rock2){
     if(dist(x,y,player.x,player.y)==1){
-      map.foreGround[x][y][0] = undefined
-      map.groundItem[x][y][0] = rockInv
-      player.xp+=2;
+      lastHit = gameClock
+      if(map.foreGround[x][y][1]>0){
+        map.foreGround[x][y][2] =gameClock
+        map.foreGround[x][y][1] -= 35
+      }
+      if(map.foreGround[x][y][1]<0){
+        map.foreGround[x][y][0] = undefined
+        map.groundItem[x][y][0] = rockInv
+        map.foreGround[x][y][1] = undefined
+        map.foreGround[x][y][2] =undefined
+        player.xp+=2;
+      }
     }
   }
   break;
@@ -305,7 +324,7 @@ switch(inv.invArr[inv.curItem]){
   case wheetseed:
     if(dist(x,y,player.x,player.y)<=2){
       if(map.mapTiles[x][y] == tilled)
-          map.plantArr[x][y][0] = new plant(1,x,y,300)
+          map.plantArr[x][y][0] = new plant(1,x,y,random(300,600))
           player.xp+=1;
         }
   break;
