@@ -192,7 +192,7 @@ class map{
 
   }
   fillMap(){
-    if(random(0,100)<60){
+    if(random(0,100)<85){
       createWoodlandsBiome();
     }
     else createOceanBiome();
