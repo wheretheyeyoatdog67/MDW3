@@ -50,7 +50,7 @@ function createOceanBiome(){
 
     }
 
-    if(rand > 98){
+    if(rand > 99){
       demArr.push(new enemy)
     }
   }

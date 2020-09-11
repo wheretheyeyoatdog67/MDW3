@@ -29,7 +29,7 @@ function draw(){
   gameClock +=1;
 
   map.drawMap();
-  pMap.drawPMap();
+
   demonUpdater();
 
 
@@ -51,7 +51,7 @@ function draw(){
 
 
 
-
+pMap.drawPMap();
 }
 }
 
