@@ -15,6 +15,7 @@ switch(keyCode){
     player.curAnimation = pl1;
     map.mapCheckNewRegion()
     player.pickUpGroundItems(floor(random(1,5)))
+    
   }
   break;
   case 68:
@@ -24,6 +25,7 @@ switch(keyCode){
     player.curAnimation = pr1;
     map.mapCheckNewRegion()
     player.pickUpGroundItems(floor(random(1,5)))
+
   }
   break;
   case 83:
@@ -33,6 +35,7 @@ switch(keyCode){
     player.curAnimation = pf1;
     map.mapCheckNewRegion()
     player.pickUpGroundItems(floor(random(1,5)))
+
     }
 
   break;
@@ -43,6 +46,7 @@ switch(keyCode){
     player.curAnimation = pu1;
     map.mapCheckNewRegion()
   player.pickUpGroundItems(floor(random(1,5)))
+
 }
   break;
   case 77:
@@ -53,9 +57,20 @@ switch(keyCode){
   break;
   case 69:
     //MAPMODE
-    if(inv.backPack == true)
-    inv.backPack = false;
-    else inv.backPack = true;
+    if(inv.backPack == true){
+      inv.backPack = false;
+
+    }
+
+    else {
+      craft.isCraft = false;
+      inv.backPack = true;
+    }
+  break;
+  case 67:
+    if(craft.isCraft != true){craft.isCraft = true
+    inv.backPack = false;}
+    else craft.isCraft = false;
   break;
 
 
@@ -136,6 +151,7 @@ switch(inv.invArr[inv.curItem]){
       map.midGround[x][y][0] = treeDead
       map.foreGround[x][y][0] = undefined
       map.groundItem[x][y][0] = logs
+      player.xp+=2;
     }
   }
   break;
@@ -144,13 +160,22 @@ switch(inv.invArr[inv.curItem]){
     if(dist(x,y,player.x,player.y)==1){
       map.foreGround[x][y][0] = undefined
       map.groundItem[x][y][0] = rockInv
+      player.xp+=2;
     }
   }
+  break;
+  case logs:
+
+    if(dist(x,y,player.x,player.y)<=2){
+      map.mapTiles[x][y] = woodPlank
+    }
+
   break;
   case cabinInv:
 
     if(dist(x,y,player.x,player.y)<3){
       player.place2by2(x,y,cabin)
+      player.xp+=25;
     }
 
   break;
@@ -158,6 +183,7 @@ switch(inv.invArr[inv.curItem]){
 
     if(dist(x,y,player.x,player.y)<3){
       player.place2by2(x,y,furnaceOff)
+      player.xp+=25;
     }
 
   break;
@@ -166,6 +192,7 @@ switch(inv.invArr[inv.curItem]){
     if(dist(x,y,player.x,player.y)<2){
       if(map.foreGround[x][y][0]==undefined){
         map.foreGround[x][y][0]=campfire
+        player.xp+=5;
       }
     }
 
@@ -177,6 +204,7 @@ switch(inv.invArr[inv.curItem]){
       for (var i = 0; i < inv.invArr.length; i++) {
         if(inv.invArr[i]==rockInv){
           inv.itemCount[i]-=1;
+          player.xp+=1;
         }
       }
     }
@@ -187,6 +215,7 @@ switch(inv.invArr[inv.curItem]){
       map.midGround[x][y][0]= wireOff;
       map.wireArr[x][y][0] = new wire(x,y);
       map.wirePlacedUpdate = true;
+      player.xp+=1;
     }
 
   break;
@@ -196,6 +225,7 @@ switch(inv.invArr[inv.curItem]){
       map.midGround[x][y][0]= transparent;
       map.lampArr[x][y][0] = new lamp(x,y);
       map.wirePlacedUpdate = true;
+      player.xp+=1;
     }
   break;
   case shovel:
@@ -203,18 +233,64 @@ switch(inv.invArr[inv.curItem]){
     if(dist(x,y,player.x,player.y)==1){
       map.foreGround[x][y][0] = undefined
       map.groundItem[x][y][0] = ebush
+      player.xp+=1;
     }
   }else if(map.midGround[x][y][0] == treeDead){
     map.midGround[x][y][0] = undefined
     map.groundItem[x][y][0] = logs
+    player.xp+=1;
+  }else if( map.midGround[x][y][0] == grassMid){
+     map.midGround[x][y][0] = undefined
+     player.xp+=1;
+  }else if( map.midGround[x][y][0] == reeds){
+     map.midGround[x][y][0] = undefined
+     map.groundItem[x][y][0] = reeds
+     player.xp+=1;
+  }
+
+  else if( map.mapTiles[x][y] == grass2 || map.mapTiles[x][y] == grass|| map.mapTiles[x][y] == sand1|| map.mapTiles[x][y] == dirt){
+    if(dist(x,y,player.x,player.y)<2){
+    if( map.foreGround[x][y][0] == undefined){
+
+      if(map.mapTiles[x][y] == sand1){
+        map.mapTiles[x][y] = sand2
+      }
+      else map.mapTiles[x][y] = dirt
+      if(map.mapTiles[x+1][y] == water1){
+        map.mapTiles[x][y] = water1
+        map.waterTiles[x][y][0] = 1;
+      }
+      if(map.mapTiles[x-1][y] == water1){
+        map.mapTiles[x][y] = water1
+        map.waterTiles[x][y][0] = 1;
+      }
+      if(map.mapTiles[x][y+1] == water1){
+        map.mapTiles[x][y] = water1
+        map.waterTiles[x][y][0] = 1;
+      }
+      if(map.mapTiles[x][y-1] == water1){
+        map.mapTiles[x][y] = water1
+        map.waterTiles[x][y][0] = 1;
+      }
+
+    }
+
+  }
   }
   break;
   case ebush:
 
     if(dist(x,y,player.x,player.y)==1){
           map.foreGround[x][y][0]= ebush
-
-}
+          player.xp+=1;
+        }
+  break;
+  case berries:
+  for (var i = 0; i < inv.invArr.length; i++) {
+    player.hunger += 10;
+    if(inv.invArr[i] == berries)inv.itemCount[i]-=1;
+    player.xp+=1;
+  }
   break;
   case turbineInv:
   if(dist(x,y,player.x,player.y)<=2){
@@ -224,6 +300,7 @@ switch(inv.invArr[inv.curItem]){
       map.foreGround[x][y-1][0] = turbine1;
       map.turbineArr.push([x,y-1])
       map.wirePlacedUpdate = true;
+      player.xp+=10;
     }
   }
   break;
@@ -231,6 +308,19 @@ switch(inv.invArr[inv.curItem]){
   player.mana += 25;
   for (var i = 0; i < inv.invArr.length; i++) {
     if(inv.invArr[i] == mush)inv.itemCount[i]-=1;
+  }
+
+  break;
+  case spikes:
+  if(dist(x,y,player.x,player.y)<=2){
+    map.midGround[x][y][0] = spikes
+    for (var i = 0; i < inv.invArr.length; i++) {
+      if(inv.invArr[i] == spikes){
+        inv.itemCount[i]-=1;
+        return 0;
+        player.xp+=1;
+      }
+    }
   }
 
   break;
@@ -256,9 +346,13 @@ switch(inv.invArr[inv.curItem]){
       player.pickUpGroundItems(1);
     }
 
-
+    return 0;
     }
-    if(dist(x,y,player.x,player.y)==1){
+    else if(craft.isCraft){
+      craft.buyItem(x,y);
+      player.xp+=5;
+    }
+    else if(dist(x,y,player.x,player.y)==1){
       if(map.foreGround[x][y][0]==cabin||map.foreGround[x-1][y][0]==cabin||map.foreGround[x-1][y-1][0]==cabin||map.foreGround[x][y-1][0]==cabin){
         player.isInCabin = true;
         player.houseLoc[0]=player.x
@@ -266,6 +360,7 @@ switch(inv.invArr[inv.curItem]){
         player.x = 11;
         player.y = 11;
       }
+      return 0;
     }
     if(inv.backPack == true ){
       if(dragingItem!=true){
@@ -287,6 +382,7 @@ switch(inv.invArr[inv.curItem]){
 
       }
     }
+    return 0;
 }
 
 
@@ -299,7 +395,7 @@ function dragItem(l){
 }
 
 function mouseWheel(event) {
-
+if(!craft.isCraft){
   if(event.delta < 0){
     if(inv.curItem == 0){
       inv.curItem = 0;
@@ -310,5 +406,22 @@ function mouseWheel(event) {
     if(inv.curItem == 9){
       inv.curItem = 9;
     }
-    else inv.curItem += 1};
+    else inv.curItem += 1}
+  }
+  else if (craft.isCraft){
+    if(event.delta < 0){
+      if(craft.arrOffSet  == 0){
+        craft.arrOffSet  = 0;
+      }
+      else craft.arrOffSet  -= 1;
+    }
+    else {
+      console.log(craft.arrOffSet+7)
+      console.log(craft.craftArr.length)
+      if(craft.arrOffSet+7 >= craft.craftArr.length){
+
+      }
+      else craft.arrOffSet  += 1}
+
+  }
 }

@@ -50,21 +50,26 @@ class inv {
     this.invArr[4] = wandInv;
     this.invArr[5] = tomb;
     this.invArr[6] = torch;
-    this.invArr[7] = cabinInv
-    this.invArr[8] = turbineInv
-    this.invArr[9] = campfire
-    this.backPackArr[0] = furnaceOffInv;
-    this.backPackArrItemCount[0] = 1;
-    this.backPackArr[1] = wireInv;
-    this.backPackArrItemCount[1] = 1;
-    this.backPackArr[2] = lampInv;
-    this.backPackArrItemCount[2] = 1;
+    // this.invArr[7] = cabinInv
+    // this.invArr[8] = turbineInv
+    // this.invArr[9] = campfire
+    // this.backPackArr[0] = furnaceOffInv;
+    // this.backPackArrItemCount[0] = 1;
+    // this.backPackArr[1] = wireInv;
+    // this.backPackArrItemCount[1] = 1;
+    // this.backPackArr[2] = lampInv;
+    // this.backPackArrItemCount[2] = 1;
+    // this.backPackArr[3] = spikes;
+    // this.backPackArrItemCount[3] = 10;
   }
 
   update(){
     this.displayCurItem();
+    this.drawXpBar();
+    this.drawBackPackNCraft();
     if(this.backPack) this.drawBackPack()
     this.drawInvItems();
+
     this.displayItemAmount();
     this.displayHealth();
 
@@ -98,6 +103,37 @@ class inv {
     for (var i = 0; i < this.invArr.length; i++) {
       image(this.invArr[i],225+i*50,725)
     }
+  }
+  drawXpBar(){
+    player.lvlUp()
+    stroke(70,40,70);
+    fill(210,180,140)
+    strokeWeight(5)
+    rect(200,750,500,25);
+    rect(700,700,50,75)
+    fill(255,255,0)
+    let xpBar = player.xp/player.maxXpthisLvl*500
+    rect(200,750,xpBar,25)
+    fill(255)
+
+    textSize(25)
+    text("Lvl",708,730)
+    text(player.lvl,714,760)
+
+
+  }
+  drawBackPackNCraft(){
+    stroke(70,40,70);
+    fill(210,180,140)
+    textSize(20)
+    rect(100,700,100,75);
+    image(craftIcon,150,738)
+
+    rect(0,700,100,75);
+    image(backPackIcon,50,733)
+    fill(255)
+    text("C",175,765)
+    text("E",75,765)
   }
   displayCurItem(){
     if(this.invArr[this.curItem]!=undefined){

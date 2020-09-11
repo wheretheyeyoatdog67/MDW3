@@ -21,6 +21,7 @@ class map{
     this.prevY = 10;
     this.wirePlacedUpdate = false;
     this.waterTiles = [];
+    this.animalArr = [];
 }
   drawMap(){
     this.mapDayNight()
@@ -58,7 +59,7 @@ class map{
         if(this.midGround[i][j][0] == lampOn||this.midGround[i][j][0]==lampOff){
           this.twobytwoArr.push([i,j,this.midGround[i][j][0]])
         }else image(this.midGround[i][j][0],i*50,j*50)}
-        if(this.groundItem[i][j][0]!=undefined) image(this.groundItem[i][j][0],i*50+10,j*50+10)
+        if(this.groundItem[i][j][0]!=undefined) image(this.groundItem[i][j][0],i*50+5,j*50+5)
         if(this.foreGround[i][j][0]!=undefined)
         {
           if(this.foreGround[i][j][0]==cabin ||this.foreGround[i][j][0]==tree6 ||this.foreGround[i][j][0]==tree5|| this.foreGround[i][j][0]==furnaceOff||this.foreGround[i][j][0]==furnace){
@@ -69,7 +70,8 @@ class map{
           else image(this.foreGround[i][j][0],i*50,j*50)
 
         }
-        this.drawWaterTiles(i,j)
+        if(this.animalArr[i][j][0]!=undefined)this.animalArr[i][j][0].update()
+
         stroke(70,40,70);
         strokeWeight(10)
         noFill()
@@ -78,6 +80,14 @@ class map{
         strokeWeight(5)
       }
     }
+    for (var i = 0; i < 17; i++) {
+      for (var j = 0; j < 14; j++) {
+        this.drawWaterTiles(i,j)
+      }
+    }
+    stroke(70,40,70);
+    //
+
     for (var i = 0; i < this.twobytwoArr.length; i++) {
       imageMode(CORNER)
       image(this.twobytwoArr[i][2],this.twobytwoArr[i][0]*50,this.twobytwoArr[i][1]*50)
@@ -138,6 +148,8 @@ class map{
     this.lampArr = [];
     this.turbineArr =[]
     this.waterTiles = [];
+    this.animalArr = [];
+    demArr = []
     for (var i = 0; i < 18; i++) {
       this.groundItem[i] = []
       this.mapTiles[i] = []
@@ -148,6 +160,7 @@ class map{
       this.wireArr[i] = [];
       this.lampArr[i] = [];
       this.waterTiles[i] = [];
+      this.animalArr[i] = [];
 
     }
     for (var i = 0; i < 18; i++) {
@@ -161,6 +174,7 @@ class map{
       this.wireArr[i][j] = [];
       this.lampArr[i][j] = [];
       this.waterTiles[i][j] = [];
+      this.animalArr[i][j] = [];
 
     }
   }
@@ -191,6 +205,7 @@ class map{
       mapGroup.curMapX  -=1;
       mapGroup.addPrevMapGroup();
       mapGroup.addToMapGroup(-1)
+
     }
     else if(player.x > 17){
       player.x = 0;
@@ -261,7 +276,9 @@ class map{
     drawWaterTiles(i,j){
       if(this.waterTiles[i][j][0]==1){
         fill(0,0,255,(i+j)*7)
+        noStroke();
         rect(i*50,j*50,50,50)
+
       }
     }
     lampTorchLight(i,j){

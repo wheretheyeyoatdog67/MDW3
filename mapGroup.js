@@ -28,13 +28,13 @@ class mapGroup{
     this.mapGroups[this.prevX][this.prevY][4] = map.turbineArr
     this.mapGroups[this.prevX][this.prevY][5] = map.lampArr
     this.mapGroups[this.prevX][this.prevY][6] = map.waterTiles
+    this.mapGroups[this.prevX][this.prevY][7] = map.animalArr
+    this.mapGroups[this.prevX][this.prevY][8] = map.demonArr
+    this.mapGroups[this.prevX][this.prevY][9] = demArr
   }
   addToMapGroup(l){
-      print('<><><><><><>');
-      print('curX ' + this.curMapX);
-      print('curY ' + this.curMapY);
-      print('prevX ' + this.prevX);
-      print('prevY ' + this.prevY);
+      player.xp+=5;
+
       if(this.mapGroups[this.curMapX][this.curMapY][0]==undefined){
 
 
@@ -52,6 +52,7 @@ class mapGroup{
     map.mapTiles = [];
     map.wireArr = [];
     map.lampArr = [];
+    map.demonArr = [];
     map.mapTiles = this.mapGroups[this.curMapX][this.curMapY][0];
     map.foreGround = this.mapGroups[this.curMapX][this.curMapY][1]
     map.midGround = this.mapGroups[this.curMapX][this.curMapY][2]
@@ -59,6 +60,9 @@ class mapGroup{
     map.turbineArr = this.mapGroups[this.curMapX][this.curMapY][4]
     map.lampArr = this.mapGroups[this.curMapX][this.curMapY][5]
     map.waterTiles = this.mapGroups[this.curMapX][this.curMapY][6]
+    map.animalArr = this.mapGroups[this.curMapX][this.curMapY][7]
+    map.demonArr = this.mapGroups[this.curMapX][this.curMapY][8]
+    demArr = this.mapGroups[this.curMapX][this.curMapY][9]
   }
 
 }

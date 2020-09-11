@@ -13,6 +13,9 @@ class player {
     this.immune = false;
     this.immuneTimer = 10;
     this.isDead = false;
+    this.lvl = 1;
+    this.xp = 0;
+    this.maxXpthisLvl = 100;
   }
   animate(){
     if(gameClock%20 == 0){
@@ -61,6 +64,13 @@ class player {
 
     image(this.curAnimation,(this.x*50)+25,(this.y*50)+25)
   }
+  lvlUp(){
+    if(this.xp > this.maxXpthisLvl){
+      this.xp = 0;
+      this.maxXpthisLvl+=25*this.lvl;
+      this.lvl +=1;
+    }
+  }
   playerDead(){
     if(this.health < 0){
       this.isDead = true;
@@ -86,7 +96,7 @@ class player {
     if(gameClock%100 == 0){
       if(this.mana>=100){
         this.mana = 100;
-      }else this.mana+=1;
+      }else this.mana+=10;
     }
   }
   immuneClock(){

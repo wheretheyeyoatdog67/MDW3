@@ -10,7 +10,7 @@ var projectileArr = [];
 
 function setup() {
 
-  createCanvas(1000, 760);
+  createCanvas(1000, 800);
   resize();
   imageMode(CENTER)
   player = new player(4,0);
@@ -19,6 +19,7 @@ function setup() {
   map.mapStartUp();
   pMap = new pMap();
   inv = new inv();
+  craft = new craft();
 
 }
 
@@ -40,7 +41,7 @@ function draw(){
   player.update();
 
   inv.update();
-
+  craft.update();
   if(map.turbineArr.length!=0){
       map.animateTurbine()
   }
@@ -166,9 +167,35 @@ function preload() {
     shell2 = loadImage('Tiles/Lake/shells2.png');
     shell3 = loadImage('Tiles/Lake/shells3.png');
 
+    woodPlank = loadImage('Tiles/mapTiles/woodPlank.png')
+    dirt = loadImage('Tiles/mapTiles/dirt.png')
+    sand2 = loadImage('Tiles/mapTiles/sand2.png')
+    spikes = loadImage('Tiles/midGround/spikes.png')
+    craftIcon = loadImage('crafting/craftIcon.png')
+    backPackIcon = loadImage('Tiles/backpack.png')
+    craftCabin = loadImage('crafting/cabinCraft.png')
+    craftCampfire = loadImage('crafting/campfireCraft.png')
 
+    craftCookedFish = loadImage('crafting/cookFishCraft.png')
+    craftFurnace= loadImage('crafting/furnaceCraft.png')
+    craftLamp = loadImage('crafting/lampCraft.png')
+    craftSpike = loadImage('crafting/spikeCraft.png')
+    craftTurbine = loadImage('crafting/turbineCraft.png')
+    craftWire = loadImage('crafting/wireCraft.png')
+    fishR=loadImage('animals/fishR.png')
+    fishL=loadImage('animals/fishL.png')
+    fishCooked=loadImage('animals/fishCooked.png')
 }
 function resize(){
+
+  fishCooked.resize(50,50);
+  fishR.resize(50,50);
+  fishL.resize(50,50);
+  backPackIcon.resize(75,75);
+  craftIcon.resize(75,75);
+  spikes.resize(50,50);
+  sand2.resize(50,50);
+  dirt.resize(50,50);
   shell1.resize(20,20);
   shell2.resize(20,20);
   shell3.resize(20,20);
