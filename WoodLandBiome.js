@@ -47,7 +47,7 @@ function createWoodlandsBiome(){
 
       }
 
-      if(rand > 99){
+      if(rand > 99.5){
         demArr.push(new enemy)
       }
     }
