@@ -22,6 +22,7 @@ class map{
     this.wirePlacedUpdate = false;
     this.waterTiles = [];
     this.animalArr = [];
+    this.plantArr = [];
 }
   drawMap(){
     this.mapDayNight()
@@ -71,7 +72,7 @@ class map{
 
         }
         if(this.animalArr[i][j][0]!=undefined)this.animalArr[i][j][0].update()
-
+        if(this.plantArr[i][j][0]!=undefined)this.plantArr[i][j][0].update()
         stroke(70,40,70);
         strokeWeight(10)
         noFill()
@@ -149,6 +150,7 @@ class map{
     this.turbineArr =[]
     this.waterTiles = [];
     this.animalArr = [];
+    this.plantArr = [];
     demArr = []
     for (var i = 0; i < 18; i++) {
       this.groundItem[i] = []
@@ -161,6 +163,7 @@ class map{
       this.lampArr[i] = [];
       this.waterTiles[i] = [];
       this.animalArr[i] = [];
+      this.plantArr[i] = [];
 
     }
     for (var i = 0; i < 18; i++) {
@@ -175,6 +178,7 @@ class map{
       this.lampArr[i][j] = [];
       this.waterTiles[i][j] = [];
       this.animalArr[i][j] = [];
+      this.plantArr[i][j] = [];
 
     }
   }

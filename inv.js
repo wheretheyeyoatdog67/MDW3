@@ -50,6 +50,8 @@ class inv {
     this.invArr[4] = wandInv;
     this.invArr[5] = tomb;
     this.invArr[6] = torch;
+    this.invArr[7] = hoe;
+    this.invArr[8] = wheetseed
     // this.invArr[7] = cabinInv
     // this.invArr[8] = turbineInv
     // this.invArr[9] = campfire

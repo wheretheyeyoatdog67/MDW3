@@ -24,8 +24,9 @@ function setup() {
 }
 
 function draw(){
+
   if(!player.isDead && !pause){
-  background(255)
+
   gameClock +=1;
 
   map.drawMap();
@@ -185,9 +186,22 @@ function preload() {
     fishR=loadImage('animals/fishR.png')
     fishL=loadImage('animals/fishL.png')
     fishCooked=loadImage('animals/fishCooked.png')
+    tilled = loadImage('Tiles/mapTiles/tilled.png')
+    hoe = loadImage('Tools/hoe.png')
+
+    wheet1 = loadImage('Plants/wheet1.png')
+    wheet2 = loadImage('Plants/wheet2.png')
+    wheet3 = loadImage('Plants/wheet3.png')
+    wheetInv = loadImage('Plants/wheetInv.png')
+    wheetseed = loadImage('Plants/wheetseed.png')
+
 }
 function resize(){
-
+  wheetInv.resize(50,50);
+  wheet1.resize(50,50);
+  wheet2.resize(50,50);
+  wheet3.resize(50,50);
+  wheetseed.resize(50,50);
   fishCooked.resize(50,50);
   fishR.resize(50,50);
   fishL.resize(50,50);

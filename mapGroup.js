@@ -31,6 +31,7 @@ class mapGroup{
     this.mapGroups[this.prevX][this.prevY][7] = map.animalArr
     this.mapGroups[this.prevX][this.prevY][8] = map.demonArr
     this.mapGroups[this.prevX][this.prevY][9] = demArr
+    this.mapGroups[this.prevX][this.prevY][10] = map.plantArr
   }
   addToMapGroup(l){
       player.xp+=5;
@@ -63,6 +64,7 @@ class mapGroup{
     map.animalArr = this.mapGroups[this.curMapX][this.curMapY][7]
     map.demonArr = this.mapGroups[this.curMapX][this.curMapY][8]
     demArr = this.mapGroups[this.curMapX][this.curMapY][9]
+    map.plantArr = this.mapGroups[this.curMapX][this.curMapY][10]
   }
 
 }

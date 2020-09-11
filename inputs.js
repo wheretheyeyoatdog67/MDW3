@@ -15,7 +15,7 @@ switch(keyCode){
     player.curAnimation = pl1;
     map.mapCheckNewRegion()
     player.pickUpGroundItems(floor(random(1,5)))
-    
+
   }
   break;
   case 68:
@@ -282,6 +282,30 @@ switch(inv.invArr[inv.curItem]){
 
     if(dist(x,y,player.x,player.y)==1){
           map.foreGround[x][y][0]= ebush
+          player.xp+=1;
+        }
+  break;
+  case hoe:
+    if(dist(x,y,player.x,player.y)<=2){
+      if(map.plantArr[x][y][0]!=undefined && map.plantArr[x][y][0].stage == 2){
+          map.plantArr[x][y][0] = undefined
+          map.groundItem[player.x][player.y][0]= wheetInv
+          player.pickUpGroundItems(floor(random(2,5)))
+          map.groundItem[player.x][player.y][0]= wheetseed
+          player.pickUpGroundItems(floor(random(2,5)))
+          player.xp+=1;
+          return 0;
+        }
+      if(map.mapTiles[x][y] == dirt || map.mapTiles[x][y] == grass || map.mapTiles[x][y] ==grass2)
+          map.mapTiles[x][y]= tilled
+          player.xp+=1;
+          return 0;
+        }
+  break;
+  case wheetseed:
+    if(dist(x,y,player.x,player.y)<=2){
+      if(map.mapTiles[x][y] == tilled)
+          map.plantArr[x][y][0] = new plant(1,x,y,300)
           player.xp+=1;
         }
   break;

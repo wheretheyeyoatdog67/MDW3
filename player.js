@@ -78,7 +78,7 @@ class player {
       fill(60,60,70,150);
       rect(0,0,900,700);
       noFill();
-      image(death,480,300)
+      image(death,475,300)
     }
   }
   hungerDrain(){
