@@ -324,7 +324,7 @@ switch(inv.invArr[inv.curItem]){
   case wheetseed:
     if(dist(x,y,player.x,player.y)<=2){
       if(map.mapTiles[x][y] == tilled)
-          map.plantArr[x][y][0] = new plant(1,x,y,random(300,600))
+          map.plantArr[x][y][0] = new plant(1,x,y,floor(random(300,600)))
           player.xp+=1;
         }
   break;
