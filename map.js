@@ -128,7 +128,7 @@ class map{
     for (var i = 0; i < 900/50; i++) {
       for (var j = 0; j < 700/50; j++) {
           noStroke();
-          if(this.lightArr[i][j]!=1) fill(0,0,0,255-this.time*7)
+          if(this.lightArr[i][j]!=1) fill(0,0,0,200-this.time*7)
           else fill(200,200,0,random(25,45));
           rect(i*50,j*50,50,50)
           this.lightArr[i][j] = 0;
